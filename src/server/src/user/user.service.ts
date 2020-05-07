@@ -5,7 +5,6 @@ import { UserEntity } from '../entity/user.entity';
 import { UserDto } from '../dto/userDto';
 import { ApiException } from '../filters/api.exception';
 import { ApiCode } from '../enums/api-code.enums';
-import { LoginDto } from '../dto/loginDto';
 
 export type User = any;
 
@@ -27,13 +26,12 @@ export class UserService {
     return result;
   }
 
-  async findOne(username: string): Promise<User | undefined> {
+  async findOne(loginDto): Promise<User | undefined> {
     console.log('user 校验');
+    return await this.userReposition.findOne({
+      userName: loginDto.userName,
+    });
     // return this.users.find(user => user.username === username);
-  }
-
-  async login(loginDto: LoginDto) {
-
   }
 
   async register(userDto: UserDto) {

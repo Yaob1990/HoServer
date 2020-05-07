@@ -1,19 +1,17 @@
-import {
-  Body,
-  Controller,
-  Get,
-  HttpCode,
-  Post,
-  UsePipes,
-} from '@nestjs/common';
+import { Body, Controller, Get, HttpCode, Post, UseGuards, UsePipes } from '@nestjs/common';
 import { UserService } from './user.service';
 import { UserDto } from '../dto/userDto';
 import { ValidationPipe } from '../pipe/validation.pipe';
 import { LoginDto } from '../dto/loginDto';
+import { AuthGuard } from '@nestjs/passport';
+import { AuthService } from '../auth/auth.service';
 
 @Controller('user')
 export class UserController {
-  constructor(private readonly userService: UserService) {}
+  constructor(
+    private readonly userService: UserService,
+    private readonly authService: AuthService,
+  ) {}
 
   @Get('all')
   all() {
@@ -29,8 +27,10 @@ export class UserController {
 
   @Post('login')
   @HttpCode(200)
-  @UsePipes(ValidationPipe)
+  // @UsePipes(ValidationPipe)
+  @UseGuards(AuthGuard('local'))
   login(@Body() loginDto: LoginDto) {
-    return this.userService.login(loginDto);
+    console.log('login');
+    return this.authService.login(loginDto);
   }
 }

@@ -37,7 +37,7 @@ export class AppModule implements NestModule {
     consumer
       .apply(AuthMiddleware)
       // 排除登录路径
-      .exclude({ path: '/auth/login', method: RequestMethod.ALL })
+      .exclude({ path: '/user/login', method: RequestMethod.ALL })
       // 对所有路由启用
       .forRoutes({ path: '*', method: RequestMethod.ALL });
   }
