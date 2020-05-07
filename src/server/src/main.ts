@@ -14,6 +14,6 @@ async function bootstrap() {
   // 全局授权中间件
   // app.use(new AuthMiddleware());
 
-  await app.listen(3003);
+  await app.listen(3000);
 }
 bootstrap();

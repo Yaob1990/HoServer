@@ -1,14 +1,13 @@
-import {Word} from "../entity/word.entity"
-export default  () => ({
+export default () => ({
   dataBaseConfig: {
     type: 'mysql',
     host: process.env.DATABASE_HOST,
-    port: parseInt(process.env.PORT,10),
+    port: parseInt(process.env.PORT, 10),
     username: process.env.USER_NAME,
     password: process.env.PASSWORD,
     database: process.env.DATABASE,
-    entities: ["dist/**/*.entity{.ts,.js}"],
+    entities: ['dist/**/*.entity{.ts,.js}'],
     synchronize: true,
-    logging: true
-  }
+    logging: true,
+  },
 });
