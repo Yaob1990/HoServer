@@ -26,12 +26,11 @@ export class UserService {
     return result;
   }
 
-  async findOne(loginDto): Promise<User | undefined> {
+  async findOne(userName): Promise<User | undefined> {
     console.log('user 校验');
     return await this.userReposition.findOne({
-      userName: loginDto.userName,
+      userName: userName,
     });
-    // return this.users.find(user => user.username === username);
   }
 
   async register(userDto: UserDto) {

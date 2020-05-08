@@ -27,10 +27,12 @@ export class UserController {
 
   @Post('login')
   @HttpCode(200)
-  // @UsePipes(ValidationPipe)
+  @UsePipes(ValidationPipe)
   @UseGuards(AuthGuard('local'))
   login(@Body() loginDto: LoginDto) {
     console.log('login');
+    console.log(loginDto);
+
     return this.authService.login(loginDto);
   }
 }
