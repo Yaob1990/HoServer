@@ -23,7 +23,7 @@ export class AuthService {
     const user = await this.usersService.findOne(loginDto.userName);
     const { password, ...result } = user;
     return {
-      ...result,
+      userInfo: result,
       access_token: this.jwtService.sign(payload),
     };
   }

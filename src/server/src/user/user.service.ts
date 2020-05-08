@@ -22,12 +22,10 @@ export class UserService {
         userName: 'Yao',
       },
     });
-    console.log(result);
     return result;
   }
 
   async findOne(userName): Promise<User | undefined> {
-    console.log('user 校验');
     return await this.userReposition.findOne({
       userName: userName,
     });
