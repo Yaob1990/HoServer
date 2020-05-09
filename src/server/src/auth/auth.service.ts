@@ -18,12 +18,20 @@ export class AuthService {
     }
     return null;
   }
+
+  /**
+   * 调用到这里的时候，前面已经做了鉴权，这里直接返回需要的内容
+   * @param loginDto
+   */
   async login(loginDto: LoginDto) {
     const payload = { userName: loginDto.userName };
-    const user = await this.usersService.findOne(loginDto.userName);
+    const user = await this.usersService.findUserInfo(loginDto.userName);
     const { password, ...result } = user;
+
     return {
       userInfo: result,
+      // 权限点
+      permission: [],
       access_token: this.jwtService.sign(payload),
     };
   }

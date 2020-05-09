@@ -1,7 +1,7 @@
 // import proImg from '@/assets/pro.svg'
 
 const IS_HOS_PRO = false
-const API_SERVER_URL = 'http://localhost:3001'
+const API_SERVER_URL = 'http://localhost:3000'
 const IMAGE_URL = 'https://gitee.com/hello-react/HoServer/raw/master/src/server/public/branding/'
 // const IMAGE_URL = API_SERVER_URL + '/public/branding/'
 

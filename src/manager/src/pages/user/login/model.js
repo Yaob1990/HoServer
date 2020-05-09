@@ -14,6 +14,7 @@ const Model = {
     effects: {
         *login({ payload }, { call, put }) {
             const response = yield call(userLogin, payload)
+            debugger
             yield put({
                 type: 'changeLoginStatus',
                 payload: { type: payload.type, autoLogin: payload.autoLogin, ...response },
@@ -50,7 +51,7 @@ const Model = {
     reducers: {
         changeLoginStatus(state, { payload }) {
             setAuthority(payload.currentAuthority)
-            setAutologinInfo({token: payload.token, autoLogin: payload.autoLogin})
+            setAutologinInfo({ token: payload.token, autoLogin: payload.autoLogin })
 
             return { ...state, status: payload.status, token: payload.token, type: payload.type }
         },

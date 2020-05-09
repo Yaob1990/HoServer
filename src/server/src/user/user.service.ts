@@ -5,6 +5,7 @@ import { UserEntity } from '../entity/user.entity';
 import { UserDto } from '../dto/userDto';
 import { ApiException } from '../filters/api.exception';
 import { ApiCode } from '../enums/api-code.enums';
+import { UserRolesEntity } from '../entity/userRoles.entity';
 
 export type User = any;
 
@@ -14,6 +15,8 @@ export class UserService {
   constructor(
     @InjectRepository(UserEntity)
     private readonly userReposition: Repository<UserEntity>,
+    @InjectRepository(UserRolesEntity)
+    private readonly userRolesReposition: Repository<UserRolesEntity>,
   ) {}
 
   async all() {
@@ -29,6 +32,27 @@ export class UserService {
     return await this.userReposition.findOne({
       userName: userName,
     });
+  }
+
+  async findUserInfo(userName): Promise<User | undefined> {
+    // return await this.userReposition.findOne({
+    //   userName: userName,
+    // });
+    // debugger;
+    // console.log('findUserInfo2');
+    // let result = await this.userReposition
+    //   .createQueryBuilder('user')
+    //   .leftJoinAndSelect('user.userRoles', 'userId')
+    //   .where('user.userName = :userName', { userName: userName })
+    //   .getMany();
+    // console.log(result);
+    // return result;
+
+    let result = await this.userReposition.findOne({
+      relations: ['userRoles'],
+      where: { userName: userName },
+    });
+    return result;
   }
 
   async register(userDto: UserDto) {

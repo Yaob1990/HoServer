@@ -1,17 +1,12 @@
-import {
-  Entity,
-  Column,
-  PrimaryGeneratedColumn,
-  CreateDateColumn,
-  UpdateDateColumn,
-} from 'typeorm';
+import { Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
+import { UserRolesEntity } from './userRoles.entity';
 
 @Entity({
   name: 'user',
 })
 export class UserEntity {
-  @PrimaryGeneratedColumn({ comment: '用户自增id' })
-  id: number;
+  @PrimaryGeneratedColumn({ name: 'user_id', comment: '用户自增id' })
+  userId: number;
 
   @Column({
     name: 'user_name',
@@ -76,4 +71,16 @@ export class UserEntity {
     comment: '更新时间',
   })
   updatedAt: Date;
+
+  @OneToMany(
+    type => UserRolesEntity,
+    roles => roles.userId,
+  )
+  userRoles: UserRolesEntity[];
+
+  // @OneToMany(
+  //   type => UserRolesEntity,
+  //   roles => roles.userId,
+  // )
+  // userRoles: UserRolesEntity[];
 }

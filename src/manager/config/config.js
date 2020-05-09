@@ -282,7 +282,7 @@ export default {
         '/api/v1/': {
             target: defaultSettings.apiServerUrl,
             changeOrigin: true,
-            // pathRewrite: { '^/server': '' },
+            pathRewrite: { '^/api/v1/': '' },
         },
     },
 }

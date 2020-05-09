@@ -4,10 +4,12 @@ import { UserController } from './user.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { UserEntity } from '../entity/user.entity';
 import { AuthModule } from '../auth/auth.module';
+import { RolesEntity } from '../entity/roles.entity';
+import { UserRolesEntity } from '../entity/userRoles.entity';
 
 @Module({
   imports: [
-    TypeOrmModule.forFeature([UserEntity]),
+    TypeOrmModule.forFeature([UserEntity, RolesEntity, UserRolesEntity]),
     // 解决循环导入的问题
     forwardRef(() => AuthModule),
   ],

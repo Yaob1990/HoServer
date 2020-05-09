@@ -1,7 +1,7 @@
-import {message} from 'antd'
+import { message } from 'antd'
 
 import { getToken } from '@/utils/authority'
-import Constants from "@/utils/constants"
+import Constants from '@/utils/constants'
 import request from '@/utils/request'
 
 /**
@@ -15,7 +15,7 @@ export async function queryCurrent() {
 
     const rep = await request(`${Constants.API_PREFIX}/user/current`, {
         method: 'GET',
-        params: { token }
+        params: { token },
     })
 
     if (rep.code / 1 !== 200) {
@@ -30,30 +30,30 @@ export async function queryCurrent() {
  */
 export async function userLogin(args) {
     const url = args.type === 'mobile' ? `${Constants.API_PREFIX}/user/login/mobile` : `${Constants.API_PREFIX}/user/login`
+    // 获取用户信息
     const rep = await request(url, {
         method: 'POST',
-        data: args
+        data: args,
     })
-
-    if (rep.code / 1 !== 200) {
+    if (rep.code === 0) {
+        // 获取用户权限
+        const permissions = (rep.data.permissions || []).map(p => p.name)
+        if (rep.data.is_admin) {
+            permissions.push('admin') // for menu authority
+        }
+        return {
+            status: 'ok',
+            type: args.type,
+            autoLogin: args.autoLogin,
+            currentAuthority: permissions,
+            ...rep.data,
+        }
+    } else {
         message.error(`登录失败:  ${rep.message || '接口异常'}`)
         return {
             status: 'error',
             type: args.type,
             currentAuthority: 'guest',
         }
-    }
-
-    const permissions = (rep.data.permissions || []).map(p => p.name)
-    if (rep.data.is_admin) {
-        permissions.push('admin') // for menu authority
-    }
-
-    return {
-        status: 'ok',
-        type: args.type,
-        autoLogin: args.autoLogin,
-        currentAuthority: permissions,
-        ...rep.data
     }
 }
