@@ -35,23 +35,24 @@ export class UserService {
   }
 
   async findUserInfo(userName): Promise<User | undefined> {
-    // return await this.userReposition.findOne({
-    //   userName: userName,
-    // });
-    // debugger;
-    // console.log('findUserInfo2');
-    // let result = await this.userReposition
-    //   .createQueryBuilder('user')
-    //   .leftJoinAndSelect('user.userRoles', 'userId')
-    //   .where('user.userName = :userName', { userName: userName })
-    //   .getMany();
-    // console.log(result);
-    // return result;
-
-    let result = await this.userReposition.findOne({
+    // find形式
+    /*  let result = await this.userReposition.findOne({
+      select: ['userId'],
       relations: ['userRoles'],
       where: { userName: userName },
-    });
+    });*/
+
+    let result = await this.userReposition
+      .createQueryBuilder('user')
+      .select(['user.userId', 'userRoles.userRoleId'])
+      // 数据需要显性返回
+      .leftJoin('user.userRoles', 'userRoles')
+      //返回佐连接的全部数据
+      // .leftJoinAndSelect('user.userRoles', 'userRoles')
+      .where('user.userName = :userName', { userName: userName })
+      .getOne();
+    console.log(result);
+
     return result;
   }
 
