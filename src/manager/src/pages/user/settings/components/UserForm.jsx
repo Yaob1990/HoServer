@@ -171,12 +171,12 @@ class UserForm extends Component {
                     <Col span={6} align="center">
                         <AvatarForm
                             src={userInfo.avatar}
-                            onUploadResult={avatarUrl => {
-                                if (avatarUrl) {
-                                    userInfo.avatar = avatarUrl
-                                    this.setState({ userInfo })
-                                }
-                            }}
+                            // onUploadResult={avatarUrl => {
+                            //     if (avatarUrl) {
+                            //         userInfo.avatar = avatarUrl
+                            //         this.setState({ userInfo })
+                            //     }
+                            // }}
                         />
                     </Col>
                 </Row>
