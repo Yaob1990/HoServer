@@ -4,10 +4,12 @@ import {
   Entity,
   JoinColumn,
   ManyToOne,
+  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
 import { UserEntity } from './user.entity';
+import { RolePermissionEntity } from './rolePermission.entity';
 
 /**
  * 用户id->角色id
@@ -34,6 +36,12 @@ export class UserRolesEntity {
   })
   roleId: number;
 
+  @OneToMany(
+    type => RolePermissionEntity,
+    rolePermission => rolePermission.roleId,
+  )
+  roleList: RolePermissionEntity[];
+
   @CreateDateColumn({
     name: 'created_at',
     type: 'datetime',
@@ -47,8 +55,4 @@ export class UserRolesEntity {
     comment: '更新时间',
   })
   updatedAt: Date;
-
-  // @OneToOne(type => RolesEntity)
-  // @JoinColumn()
-  // name: RolesEntity;
 }

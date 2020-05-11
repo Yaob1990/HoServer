@@ -1,18 +1,30 @@
-import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  JoinColumn,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
+} from 'typeorm';
+import { UserRolesEntity } from './userRoles.entity';
 
 /**
- * 用户id-角色id
+ * 角色->权限点
  */
 @Entity({
   name: 'role_permission',
 })
-export class UserRolesEntity {
+export class RolePermissionEntity {
   @PrimaryGeneratedColumn({ name: 'role_permission_id', comment: '自增id' })
   rolePermissionId: number;
 
-  @Column({
+  @ManyToOne(
+    type => UserRolesEntity,
+    userRoles => userRoles.roleId,
+  )
+  @JoinColumn({
     name: 'role_id',
-    comment: '角色id',
   })
   roleId: number;
 

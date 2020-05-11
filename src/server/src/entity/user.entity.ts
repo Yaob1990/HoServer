@@ -77,10 +77,4 @@ export class UserEntity {
     roles => roles.userId,
   )
   userRoles: UserRolesEntity[];
-
-  // @OneToMany(
-  //   type => UserRolesEntity,
-  //   roles => roles.userId,
-  // )
-  // userRoles: UserRolesEntity[];
 }

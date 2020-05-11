@@ -6,6 +6,7 @@ import { UserDto } from '../dto/userDto';
 import { ApiException } from '../filters/api.exception';
 import { ApiCode } from '../enums/api-code.enums';
 import { UserRolesEntity } from '../entity/userRoles.entity';
+import { RolePermissionEntity } from '../entity/rolePermission.entity';
 
 export type User = any;
 
@@ -17,6 +18,8 @@ export class UserService {
     private readonly userReposition: Repository<UserEntity>,
     @InjectRepository(UserRolesEntity)
     private readonly userRolesReposition: Repository<UserRolesEntity>,
+    @InjectRepository(RolePermissionEntity)
+    private readonly rolePermissionReposition: Repository<RolePermissionEntity>,
   ) {}
 
   async all() {
@@ -36,19 +39,25 @@ export class UserService {
 
   async findUserInfo(userName): Promise<User | undefined> {
     // find形式
-    /*  let result = await this.userReposition.findOne({
-      select: ['userId'],
-      relations: ['userRoles'],
-      where: { userName: userName },
-    });*/
+    // let result = await this.userReposition.findOne({
+    //   select: ['userId'],
+    //   // relations: ['userRoles'],
+    //   join: {
+    //     alias: 'user',
+    //     leftJoinAndSelect: {
+    //       userRoles: 'user.role_id',
+    //     },
+    //   },
+    //   where: { userName: userName },
+    // });
 
     let result = await this.userReposition
       .createQueryBuilder('user')
-      .select(['user.userId', 'userRoles.userRoleId'])
+      // .select(['user.userId', 'userRoles.userRoleId'])
       // 数据需要显性返回
-      .leftJoin('user.userRoles', 'userRoles')
+      .leftJoinAndSelect('user.userRoles', 'userRoles')
       //返回佐连接的全部数据
-      // .leftJoinAndSelect('user.userRoles', 'userRoles')
+      .leftJoinAndSelect('userRoles.roleList', 'roleList')
       .where('user.userName = :userName', { userName: userName })
       .getOne();
     console.log(result);
