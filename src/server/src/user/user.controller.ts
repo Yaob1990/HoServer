@@ -1,12 +1,4 @@
-import {
-  Body,
-  Controller,
-  Get,
-  HttpCode,
-  Post,
-  UseGuards,
-  UsePipes,
-} from '@nestjs/common';
+import { Body, Controller, Get, Headers, HttpCode, Post, UseGuards, UsePipes } from '@nestjs/common';
 import { UserService } from './user.service';
 import { UserDto } from '../dto/userDto';
 import { ValidationPipe } from '../pipe/validation.pipe';
@@ -42,5 +34,18 @@ export class UserController {
     console.log(loginDto);
 
     return this.authService.login(loginDto);
+  }
+
+  @Get('current')
+  current(@Headers() headers) {
+    const userName = headers.userName;
+
+    return this.userService.findUserInfo(userName);
+  }
+
+  @Post('update/:id')
+  @HttpCode(200)
+  update(@Headers('userName') userName: string, @Body() userInfo) {
+    return this.userService.updateUserInfo(userInfo, userName);
   }
 }

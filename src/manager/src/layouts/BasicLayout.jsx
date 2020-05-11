@@ -5,7 +5,7 @@
  */
 import { GithubOutlined } from '@ant-design/icons'
 import ProLayout, { DefaultFooter, SettingDrawer } from '@ant-design/pro-layout'
-import { Button,Result } from 'antd'
+import { Button, Result } from 'antd'
 import { connect } from 'dva'
 import React, { useEffect } from 'react'
 import { formatMessage } from 'umi-plugin-react/locale'
@@ -15,7 +15,7 @@ import RightContent from '@/components/GlobalHeader/RightContent'
 import Authorized from '@/utils/Authorized'
 import { getAuthorityFromRouter } from '@/utils/utils'
 
-import defaultSettings from "../../config/defaultSettings"
+import defaultSettings from '../../config/defaultSettings'
 
 const noMatch = (
     <Result
@@ -63,10 +63,14 @@ const defaultFooterDom = (
             // },
             {
                 key: 'github',
-                title: <span><GithubOutlined /> GITHUB</span>,
+                title: (
+                    <span>
+                        <GithubOutlined /> GITHUB
+                    </span>
+                ),
                 href: 'https://github.com/helloreact/HoServer',
                 blankTarget: true,
-            }
+            },
         ]}
     />
 )

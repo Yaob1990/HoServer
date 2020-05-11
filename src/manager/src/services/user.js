@@ -15,10 +15,9 @@ export async function queryCurrent() {
 
     const rep = await request(`${Constants.API_PREFIX}/user/current`, {
         method: 'GET',
-        params: { token },
     })
 
-    if (rep.code / 1 !== 200) {
+    if (rep.code / 1 !== 0) {
         message.error(`获取当前用户信息失败:  ${rep.message || '接口异常'}`)
     } else {
         return rep.data
@@ -37,10 +36,11 @@ export async function userLogin(args) {
     })
     if (rep.code === 0) {
         // 获取用户权限
-        const permissions = (rep.data.permissions || []).map(p => p.name)
-        if (rep.data.is_admin) {
-            permissions.push('admin') // for menu authority
-        }
+        // const permissions = (rep.data.permissions || []).map(p => p.name)
+        // if (rep.data.is_admin) {
+        //     permissions.push('admin') // for menu authority
+        // }
+        const permissions = ['admin']
         return {
             status: 'ok',
             type: args.type,

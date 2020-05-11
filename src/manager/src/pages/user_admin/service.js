@@ -1,4 +1,4 @@
-import {message} from "antd"
+import { message } from 'antd'
 import _ from 'lodash'
 
 import Constants from '@/utils/constants'
@@ -16,7 +16,7 @@ const wrapper = {}
 wrapper.getRolePermCategories = async function() {
     if (!rolePermCategories) {
         const rep = await request(`${Constants.API_PREFIX}/user/roles/categories`, {
-            method: 'GET'
+            method: 'GET',
         })
 
         if (rep.code / 1 !== 200) {
@@ -33,10 +33,10 @@ wrapper.getRolePermCategories = async function() {
 /**
  * 获取角色列表
  */
-wrapper.listRole = async function () {
+wrapper.listRole = async function() {
     if (!roleList) {
         const rep = await request(`${Constants.API_PREFIX}/user/roles?page_size=9999`, {
-            method: 'GET'
+            method: 'GET',
         })
 
         roleList = []
@@ -47,7 +47,7 @@ wrapper.listRole = async function () {
 
             for (let i = 0; i < data.length; i++) {
                 const role = data[i]
-                roleList.push({key: role.name, title: role.dis_name})
+                roleList.push({ key: role.name, title: role.dis_name })
             }
         }
     }
@@ -58,10 +58,10 @@ wrapper.listRole = async function () {
 /**
  * 创建角色
  */
-wrapper.createRole = async function (record) {
+wrapper.createRole = async function(record) {
     const rep = await request(`${Constants.API_PREFIX}/user/roles`, {
         method: 'POST',
-        data: record
+        data: record,
     })
 
     if (rep.code / 1 !== 200) {
@@ -76,10 +76,10 @@ wrapper.createRole = async function (record) {
 /**
  * 更新角色
  */
-wrapper.updateRole = async function (name, record) {
+wrapper.updateRole = async function(name, record) {
     const rep = await request(`${Constants.API_PREFIX}/user/roles/${name}`, {
         method: 'POST',
-        data: record
+        data: record,
     })
 
     if (rep.code / 1 !== 200) {
@@ -94,9 +94,9 @@ wrapper.updateRole = async function (name, record) {
 /**
  * 删除角色，需确保角色没有被其他模型引用
  */
-wrapper.deleteRole = async function (name) {
+wrapper.deleteRole = async function(name) {
     const rep = await request(`${Constants.API_PREFIX}/user/roles/${name}`, {
-        method: 'DELETE'
+        method: 'DELETE',
     })
 
     if (rep.code / 1 !== 200) {
@@ -111,10 +111,10 @@ wrapper.deleteRole = async function (name) {
 /**
  * 获取权限列表
  */
-wrapper.listPermission = async function () {
+wrapper.listPermission = async function() {
     if (!permissionList) {
         const rep = await request(`${Constants.API_PREFIX}/user/permissions?page_size=9999`, {
-            method: 'GET'
+            method: 'GET',
         })
 
         permissionList = []
@@ -126,7 +126,7 @@ wrapper.listPermission = async function () {
 
             for (let i = 0; i < data.length; i++) {
                 const permission = data[i]
-                permissionList.push({key: permission.name, title: permission.dis_name})
+                permissionList.push({ key: permission.name, title: permission.dis_name })
             }
         }
     }
@@ -137,10 +137,10 @@ wrapper.listPermission = async function () {
 /**
  * 创建权限
  */
-wrapper.createPermission = async function (record) {
+wrapper.createPermission = async function(record) {
     const rep = await request(`${Constants.API_PREFIX}/user/permissions`, {
         method: 'POST',
-        data: record
+        data: record,
     })
 
     if (rep.code / 1 !== 200) {
@@ -155,10 +155,10 @@ wrapper.createPermission = async function (record) {
 /**
  * 更新权限
  */
-wrapper.updatePermission = async function (name, record) {
+wrapper.updatePermission = async function(name, record) {
     const rep = await request(`${Constants.API_PREFIX}/user/permissions/${name}`, {
         method: 'POST',
-        data: record
+        data: record,
     })
 
     if (rep.code / 1 !== 200) {
@@ -173,9 +173,9 @@ wrapper.updatePermission = async function (name, record) {
 /**
  * 删除权限，需确保权限没有被其他模型引用
  */
-wrapper.deletePermission = async function (name) {
+wrapper.deletePermission = async function(name) {
     const rep = await request(`${Constants.API_PREFIX}/user/permissions/${name}`, {
-        method: 'DELETE'
+        method: 'DELETE',
     })
 
     if (rep.code / 1 !== 200) {
@@ -190,9 +190,9 @@ wrapper.deletePermission = async function (name) {
 /**
  * 获取用户详情
  */
-wrapper.getUserDetail = async function (userId) {
+wrapper.getUserDetail = async function(userId) {
     const rep = await request(`${Constants.API_PREFIX}/user/users/${userId}`, {
-        method: 'GET'
+        method: 'GET',
     })
 
     if (rep.code / 1 !== 200) {
@@ -206,10 +206,10 @@ wrapper.getUserDetail = async function (userId) {
 /**
  * 创建用户
  */
-wrapper.createUser = async function (record) {
+wrapper.createUser = async function(record) {
     const rep = await request(`${Constants.API_PREFIX}/user/users`, {
         method: 'POST',
-        data: record
+        data: record,
     })
 
     if (rep.code / 1 !== 200) {
@@ -223,10 +223,11 @@ wrapper.createUser = async function (record) {
 /**
  * 更新用户
  */
-wrapper.updateUser = async function (userId, record) {
-    const rep = await request(`${Constants.API_PREFIX}/user/users/${userId}`, {
+wrapper.updateUser = async function(userId, record) {
+    debugger
+    const rep = await request(`${Constants.API_PREFIX}/user/update/${userId}`, {
         method: 'POST',
-        data: record
+        data: record,
     })
 
     if (rep.code / 1 !== 200) {
@@ -245,8 +246,8 @@ wrapper.batchUpdateUser = async (userIds, userInfos) => {
         method: 'POST',
         data: {
             user_id: userIds,
-            list: userInfos
-        }
+            list: userInfos,
+        },
     })
 
     if (rep.code / 1 !== 200) {

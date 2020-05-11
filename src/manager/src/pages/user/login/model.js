@@ -19,7 +19,7 @@ const Model = {
                 type: 'changeLoginStatus',
                 payload: { type: payload.type, autoLogin: payload.autoLogin, ...response },
             }) // Login successfully
-
+            debugger
             if (response.status === 'ok') {
                 const urlParams = new URL(window.location.href)
                 const params = getPageQuery()
@@ -50,6 +50,7 @@ const Model = {
     },
     reducers: {
         changeLoginStatus(state, { payload }) {
+            debugger
             setAuthority(payload.currentAuthority)
             setAutologinInfo({ token: payload.token, autoLogin: payload.autoLogin })
 

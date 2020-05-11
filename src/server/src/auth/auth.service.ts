@@ -32,7 +32,7 @@ export class AuthService {
       userInfo: result,
       // 权限点
       permission: [],
-      access_token: this.jwtService.sign(payload),
+      token: this.jwtService.sign(payload),
     };
   }
 }

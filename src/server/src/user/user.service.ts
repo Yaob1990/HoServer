@@ -51,7 +51,7 @@ export class UserService {
     //   where: { userName: userName },
     // });
 
-    let result = await this.userReposition
+    const result = await this.userReposition
       .createQueryBuilder('user')
       // .select(['user.userId', 'userRoles.userRoleId'])
       // 数据需要显性返回
@@ -84,6 +84,41 @@ export class UserService {
       return true;
     } else {
       throw new ApiException('注册失败', ApiCode.BUSINESS_ERROR, 200);
+    }
+  }
+
+  async updateUserInfo(userInfo: any, userNameToken: string) {
+    const { userName, password, ...other } = userInfo;
+    // 防止刷接口，验证身份，只能修改自己的内容
+    if (userNameToken === userName) {
+      // 禁止修改用户名,前端没法修改，如果刷接口修改
+      try {
+        // 获取实体
+        const user = await this.userReposition.findOne({ where: { userName } });
+        // 合并实体
+        let mergeData = {};
+        // 更新密码
+        if (password.trim()) {
+          mergeData = await this.userReposition.merge(user, {
+            ...other,
+            password,
+          });
+        } else {
+          mergeData = await this.userReposition.merge(user, {
+            ...other,
+          });
+        }
+
+        //  保存到数据库
+        const result = await this.userReposition.save(mergeData);
+        return result;
+      } catch (error) {}
+    } else {
+      throw new ApiException(
+        '用户名校验失败，请勿恶意请求',
+        ApiCode.BUSINESS_ERROR,
+        200,
+      );
     }
   }
 }

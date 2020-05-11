@@ -2,8 +2,8 @@ import { stringify } from 'querystring'
 import router from 'umi/router'
 
 import { queryCurrent } from '@/services/user'
-import { setAuthority,setAutologinInfo } from '@/utils/authority'
-import {getPageQuery} from "@/utils/utils"
+import { setAuthority, setAutologinInfo } from '@/utils/authority'
+import { getPageQuery } from '@/utils/utils'
 
 const UserModel = {
     namespace: 'user',
@@ -29,6 +29,7 @@ const UserModel = {
         },
 
         *updateCurrent({ payload }, { put }) {
+            debugger
             yield put({
                 type: 'saveCurrentUser',
                 payload: payload.userInfo,
@@ -38,7 +39,7 @@ const UserModel = {
         *logout(_, { put }) {
             yield put({
                 type: 'saveCurrentUser',
-                payload: null
+                payload: null,
             })
 
             setAuthority('')
