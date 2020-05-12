@@ -3,11 +3,11 @@ import { message, Upload } from 'antd'
 import moment from 'moment'
 import React, { useEffect, useState } from 'react'
 
-import Constants from "@/utils/constants"
+import Constants from '@/utils/constants'
 import request from '@/utils/request'
 import { getExtType } from '@/utils/utils'
 
-import defaultSettings from "../../../config/defaultSettings"
+import defaultSettings from '../../../config/defaultSettings'
 
 /* 用法
 <UploadFile
@@ -22,7 +22,8 @@ import defaultSettings from "../../../config/defaultSettings"
  */
 
 const UploadFile = props => {
-    const {category, onChange, onUploadFinish} = props
+    debugger
+    const { category, onChange, onUploadFinish } = props
     const maxSize = props.maxSize || 1024
     const options = props.options || {}
     const accept = options.accept || '*.*'
@@ -85,6 +86,7 @@ const UploadFile = props => {
             action={uploadUrl}
             accept={accept}
             beforeUpload={async file => {
+                debugger
                 if (accept.indexOf(getExtType(file.name).toLowerCase()) < 0) {
                     message.info(`请上传${accept}格式的文件`)
                     return false
@@ -104,7 +106,7 @@ const UploadFile = props => {
                     const policyData = uploadPolicy
                     policyData.key = `${category}/${moment().format('YYYY-MM/DD/hhmm')}/${file.name}`
 
-                    setUploadPolicy({...uploadPolicy})
+                    setUploadPolicy({ ...uploadPolicy })
                 }
 
                 return true

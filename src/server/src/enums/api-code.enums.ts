@@ -8,5 +8,5 @@ export enum ApiCode {
   SIGN_ERROR = 4003, // 验签失败
   TOKEN_ERROR = 4004, // token不合法
   EXIST_ERROR = 4005, // 资源已经存在
-
+  FILE_TYPE_ERROR = 4006, // 文件类型错误
 }

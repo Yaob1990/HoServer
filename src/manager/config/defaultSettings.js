@@ -23,7 +23,7 @@ export default {
     menu: {
         locale: true,
     },
-    title:'HoServer',
+    title: 'HoServer',
     pwa: false,
 
     // 产品名称，主要用于登录等页面显示
@@ -38,5 +38,5 @@ export default {
     // 监控系统地址
     monitorUrl: MONITOR_URL,
     // 是否使用阿里云存储上传（网页客户端直传）// demo replace(false|true)
-    enableOssUpload: true
+    enableOssUpload: false,
 }

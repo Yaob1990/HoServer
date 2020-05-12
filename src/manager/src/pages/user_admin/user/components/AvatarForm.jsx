@@ -1,10 +1,11 @@
 import { Form as LegacyForm, Icon } from '@ant-design/compatible'
 import { UploadOutlined } from '@ant-design/icons'
-import { Avatar, Button } from 'antd'
+import { Avatar, Button, Upload } from 'antd'
 import React, { useEffect, useState } from 'react'
 
 import UploadFile from '@/components/UploadFile'
 import { ossProcessImg } from '@/utils/utils'
+import { getToken } from '@/utils/authority'
 
 const AvatarForm = props => {
     const { onUploadResult, src } = props
@@ -21,7 +22,7 @@ const AvatarForm = props => {
             accept: '.jpg,.jpeg,.png',
             showUploadList: false,
             headers: {
-                authorization: 'authorization-text',
+                token: getToken(),
             },
         },
         onUploadFinish: (success, percent, fileList) => {
@@ -40,6 +41,7 @@ const AvatarForm = props => {
                 <Avatar src={avatarSrc} size={128} icon={avatarSrc ? undefined : <Icon type="user" />} style={{ marginTop: 50 }} />
             </div>
             <div style={{ marginTop: 10 }}>
+                <div>1111</div>
                 <UploadFile {...uploadProps}>
                     <Button>
                         <UploadOutlined />

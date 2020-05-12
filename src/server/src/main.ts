@@ -2,10 +2,11 @@ import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { HttpExceptionFilter } from './filters/http-exception.filter';
 import { TransformInterceptor } from './interceptor/transform.interceptor';
-import { AuthMiddleware } from './middleware/auth.middleware';
+import { join } from 'path';
+import { NestExpressApplication } from '@nestjs/platform-express';
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
+  const app = await NestFactory.create<NestExpressApplication>(AppModule);
   app.enableCors();
   // 异常过滤器
   app.useGlobalFilters(new HttpExceptionFilter());
@@ -13,6 +14,10 @@ async function bootstrap() {
   app.useGlobalInterceptors(new TransformInterceptor());
   // 全局授权中间件
   // app.use(new AuthMiddleware());
+  // 静态文件路径
+  app.useStaticAssets(join(__dirname, '../public/'), {
+    prefix: '/static/',
+  });
 
   await app.listen(3000);
 }

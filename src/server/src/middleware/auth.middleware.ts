@@ -7,6 +7,8 @@ import { ApiCode } from '../enums/api-code.enums';
 @Injectable()
 export class AuthMiddleware implements NestMiddleware {
   use(req: any, res: any, next: () => void) {
+    console.log('中间件');
+    console.log(req);
     const token = req.headers.token;
     if (token) {
       // { userName: 'john', sub: 1, iat: 1588819515, exp: 1594003515 } 解码出来是这个格式
