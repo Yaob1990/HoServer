@@ -16,7 +16,7 @@ async function bootstrap() {
   // app.use(new AuthMiddleware());
   // 静态文件路径
   app.useStaticAssets(join(__dirname, '../public/'), {
-    prefix: '/static/',
+    prefix: '/public/',
   });
 
   await app.listen(3000);

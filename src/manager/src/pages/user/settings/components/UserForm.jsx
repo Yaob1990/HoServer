@@ -2,7 +2,7 @@
 import '@ant-design/compatible/assets/index.css'
 
 import { Form as LegacyForm, Icon } from '@ant-design/compatible'
-import { Card, Col, Input, message, Row, Select, Tag, Tooltip } from 'antd'
+import { Card, Col, Input, Row, Select, Tag, Tooltip } from 'antd'
 import _ from 'lodash'
 import React, { Component } from 'react'
 
@@ -171,12 +171,13 @@ class UserForm extends Component {
                     <Col span={6} align="center">
                         <AvatarForm
                             src={userInfo.avatar}
-                            // onUploadResult={avatarUrl => {
-                            //     if (avatarUrl) {
-                            //         userInfo.avatar = avatarUrl
-                            //         this.setState({ userInfo })
-                            //     }
-                            // }}
+                            onUploadResult={avatarUrl => {
+                                debugger
+                                if (avatarUrl) {
+                                    userInfo.avatar = avatarUrl
+                                    this.setState({ userInfo })
+                                }
+                            }}
                         />
                     </Col>
                 </Row>

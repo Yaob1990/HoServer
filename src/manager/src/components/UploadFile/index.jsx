@@ -86,7 +86,6 @@ const UploadFile = props => {
             action={uploadUrl}
             accept={accept}
             beforeUpload={async file => {
-                debugger
                 if (accept.indexOf(getExtType(file.name).toLowerCase()) < 0) {
                     message.info(`请上传${accept}格式的文件`)
                     return false

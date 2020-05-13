@@ -9,4 +9,5 @@ export enum ApiCode {
   TOKEN_ERROR = 4004, // token不合法
   EXIST_ERROR = 4005, // 资源已经存在
   FILE_TYPE_ERROR = 4006, // 文件类型错误
+  SOURCE_ERROR = 4007, // 资源不存在
 }

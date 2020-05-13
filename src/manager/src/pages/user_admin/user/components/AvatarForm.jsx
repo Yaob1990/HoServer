@@ -1,6 +1,6 @@
 import { Form as LegacyForm, Icon } from '@ant-design/compatible'
 import { UploadOutlined } from '@ant-design/icons'
-import { Avatar, Button, Upload } from 'antd'
+import { Avatar, Button } from 'antd'
 import React, { useEffect, useState } from 'react'
 
 import UploadFile from '@/components/UploadFile'
@@ -29,8 +29,9 @@ const AvatarForm = props => {
             console.log('AvatarForm upload result: ', fileList)
 
             if (success && fileList[0]) {
-                setAvatarSrc(fileList[0].response)
-                onUploadResult && onUploadResult(fileList[0].response)
+                setAvatarSrc(fileList[0].response.data.url)
+                debugger
+                onUploadResult && onUploadResult(fileList[0].response.data.url)
             }
         },
     }

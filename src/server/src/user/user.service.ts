@@ -60,6 +60,9 @@ export class UserService {
       .leftJoinAndSelect('userRoles.roleList', 'roleList')
       .where('user.userName = :userName', { userName: userName })
       .getOne();
+    if (result.avatar) {
+      result.avatar = `http://localhost:3000/${result.avatar}`;
+    }
     console.log(result);
 
     return result;
@@ -119,6 +122,17 @@ export class UserService {
         ApiCode.BUSINESS_ERROR,
         200,
       );
+    }
+  }
+
+  async saveAvatar(filePath, userName) {
+    const user = await this.userReposition.findOne({ where: { userName } });
+    user.avatar = filePath;
+    const result = await this.userReposition.save(user);
+    if (result) {
+      return { url: `http://localhost:3000/${filePath}` };
+    } else {
+      throw new ApiException('头像上传失败', ApiCode.BUSINESS_ERROR, 200);
     }
   }
 }

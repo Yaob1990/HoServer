@@ -1,4 +1,4 @@
-import { Injectable, NestMiddleware } from '@nestjs/common';
+import { HttpStatus, Injectable, NestMiddleware } from '@nestjs/common';
 import * as jwt from 'jsonwebtoken';
 import { jwtConstants } from '../auth/constants';
 import { ApiException } from '../filters/api.exception';
@@ -25,7 +25,16 @@ export class AuthMiddleware implements NestMiddleware {
         throw new ApiException('签名校验失败', ApiCode.SIGN_ERROR, 200);
       }
     } else {
-      throw new ApiException('签名校验失败', ApiCode.SIGN_ERROR, 200);
+      // public 目录内容（静态资源，用户上传）不校验
+      if (req.baseUrl.startsWith('/public/')) {
+        throw new ApiException(
+          '资源不存在',
+          ApiCode.SOURCE_ERROR,
+          HttpStatus.NOT_FOUND,
+        );
+      } else {
+        throw new ApiException('签名校验失败', ApiCode.SIGN_ERROR, 200);
+      }
     }
   }
 }

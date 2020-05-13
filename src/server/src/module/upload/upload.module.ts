@@ -8,6 +8,7 @@ import { UploadController } from './upload.controller';
 import { UploadService } from './upload.service';
 import { ApiCode } from '../../enums/api-code.enums';
 import { ApiException } from '../../filters/api.exception';
+import { UserModule } from '../../user/user.module';
 
 const image = ['gif', 'png', 'jpg', 'jpeg', 'bmp', 'webp'];
 const video = ['mp4', 'webm'];
@@ -58,6 +59,7 @@ function tempType(mimeType) {
         return cb(null, true);
       },
     }),
+    UserModule,
   ],
   controllers: [UploadController],
   providers: [UploadService],

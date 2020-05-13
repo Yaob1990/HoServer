@@ -1,4 +1,9 @@
-import { MiddlewareConsumer, Module, NestModule, RequestMethod } from '@nestjs/common';
+import {
+  MiddlewareConsumer,
+  Module,
+  NestModule,
+  RequestMethod,
+} from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { ConfigModule, ConfigService } from '@nestjs/config';
@@ -29,13 +34,14 @@ const envFilePath =
   controllers: [AppController],
   providers: [AppService],
 })
+// export class AppModule {}
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer): any {
     consumer
       .apply(AuthMiddleware)
       // 排除登录路径
       .exclude(
-        { path: '/static/', method: RequestMethod.ALL },
+        { path: '/public/**', method: RequestMethod.ALL },
         { path: '/user/login', method: RequestMethod.ALL },
       )
       // 对所有路由启用
