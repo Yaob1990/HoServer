@@ -22,11 +22,6 @@ export class UserController {
     private readonly authService: AuthService,
   ) {}
 
-  @Get('all')
-  all() {
-    return this.userService.all();
-  }
-
   @Post('register')
   @HttpCode(200)
   @UsePipes(ValidationPipe)
@@ -58,22 +53,8 @@ export class UserController {
     return this.userService.updateUserInfo(userInfo, userName);
   }
 
-  // @Post('upload')
-  // @UseInterceptors(
-  //   FileInterceptor('file', {
-  //     storage: multer.diskStorage({
-  //       // 配置文件上传后的文件夹路径
-  //       destination: `./public/uploads/${dayjs().format('YYYY-MM-DD')}`,
-  //       filename: (req, file, cb) => {
-  //         // 在此处自定义保存后的文件名称
-  //         const filename = `${nuid.next()}.${file.mimetype.split('/')[1]}`;
-  //         return cb(null, filename);
-  //       },
-  //     }),
-  //   }),
-  // )
-  // uploadFile(@UploadedFile() file) {
-  //   console.log('文件上传');
-  //   console.log(file);
-  // }
+  @Get('users')
+  users() {
+    return this.userService.all();
+  }
 }

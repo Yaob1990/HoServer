@@ -23,11 +23,7 @@ export class UserService {
   ) {}
 
   async all() {
-    const result = await this.userReposition.find({
-      where: {
-        userName: 'Yao',
-      },
-    });
+    const result = await this.userReposition.find();
     return result;
   }
 

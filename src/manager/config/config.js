@@ -1,5 +1,5 @@
 import defaultSettings from './defaultSettings' // https://umijs.org/config/
-import {Icon} from "@ant-design/compatible"
+import { Icon } from '@ant-design/compatible'
 
 import slash from 'slash2'
 import themePluginConfig from './themePluginConfig'
@@ -105,7 +105,7 @@ export default {
                             name: 'home',
                             icon: 'home',
                             component: './home',
-                            authority: 'admin'
+                            authority: 'admin',
                         },
                         // 接口管理
                         {
@@ -117,12 +117,12 @@ export default {
                                 {
                                     path: '/apimanage/dictionary',
                                     name: 'dictionary',
-                                    component: './interface/dictionary'
+                                    component: './interface/dictionary',
                                 },
                                 {
                                     path: '/apimanage/model',
                                     name: 'model',
-                                    component: './interface/model'
+                                    component: './interface/model',
                                 },
                                 {
                                     path: '/apimanage/service',
@@ -132,17 +132,17 @@ export default {
                                 {
                                     path: '/apimanage/router',
                                     name: 'router',
-                                    component: './interface/api'
+                                    component: './interface/api',
                                 },
                                 {
                                     path: '/apimanage/apidoc',
                                     name: 'apidoc',
-                                    component: 'Pro'
+                                    component: 'Pro',
                                 },
                                 {
                                     path: '/apimanage/sdk',
                                     name: 'sdk',
-                                    component: 'Pro'
+                                    component: 'Pro',
                                 },
                             ],
                         },
@@ -155,8 +155,8 @@ export default {
                                 {
                                     path: '/content/post',
                                     name: 'post',
-                                    component: './content/post'
-                                }
+                                    component: './content/post',
+                                },
                             ],
                         },
                         {
@@ -169,7 +169,7 @@ export default {
                                     path: '/payment/payment',
                                     name: 'payment',
                                     component: 'Pro',
-                                }
+                                },
                             ],
                         },
                         {
@@ -181,23 +181,23 @@ export default {
                                 {
                                     path: '/system/announce',
                                     name: 'announce',
-                                    component: './system/announce'
+                                    component: './system/announce',
                                 },
                                 {
                                     path: '/system/logs',
                                     name: 'logs',
-                                    component: './system/logs'
+                                    component: './system/logs',
                                 },
                                 {
                                     path: '/system/monitor',
                                     name: 'monitor',
-                                    component: 'Pro'
+                                    component: 'Pro',
                                 },
                                 {
                                     path: '/system/settings',
                                     name: 'settings',
-                                    component: './system/settings'
-                                }
+                                    component: './system/settings',
+                                },
                             ],
                         },
                         // 用户管理
@@ -205,23 +205,23 @@ export default {
                             path: '/user_admin',
                             name: 'user_admin',
                             icon: 'team',
-                            authority: 'user:manage',
+                            // authority: 'user:manage',
                             routes: [
                                 {
                                     path: '/user_admin/users',
                                     name: 'users',
-                                    component: './user_admin/user'
+                                    component: './user_admin/user',
                                 },
                                 {
                                     path: '/user_admin/permissions',
                                     name: 'permissions',
-                                    component: './user_admin/permission'
+                                    component: './user_admin/permission',
                                 },
                                 {
                                     path: '/user_admin/roles',
                                     name: 'roles',
-                                    component: './user_admin/role'
-                                }
+                                    component: './user_admin/role',
+                                },
                             ],
                         },
                         {
@@ -229,11 +229,11 @@ export default {
                             name: 'profile',
                             icon: 'user',
                             authority: 'admin',
-                            component: './user/settings'
+                            component: './user/settings',
                         },
                         {
                             component: '404',
-                        }
+                        },
                     ],
                 },
             ],
@@ -243,8 +243,7 @@ export default {
     theme: {
         // ...darkTheme,
     },
-    define: {
-    },
+    define: {},
     ignoreMomentLocale: true,
     lessLoaderOptions: {
         javascriptEnabled: true,
